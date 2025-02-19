@@ -3,14 +3,12 @@ const bodyParser = require('body-parser');
 const { umzug }  = require('./utils/migrate');
 const { updateUserBalance, createUserBalance } = require('./controllers/userController');
 const validateUpdateBalance = require('./middlewares/validateUpdateBalance');
-const validateCreateUser = require('./middlewares/validateCreateUser');
 
 const app = express();
 
 app.use(bodyParser.json());
 
 app.put('/update-balance', validateUpdateBalance, updateUserBalance);
-app.post('/create-user', validateCreateUser, createUserBalance);
 
 
 umzug.up().then(() => {
